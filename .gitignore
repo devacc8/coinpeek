@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+build/
+dist/
+*.zip
+
+# IDE & Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Local development
+.claude/
+doc_internal/
+to-do.txt
+
+# Logs
+*.log
+npm-debug.log*
+
+# Optional: lock file (uncomment if needed)
+# package-lock.json

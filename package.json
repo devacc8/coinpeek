@@ -1,0 +1,16 @@
+{
+  "name": "coinpeek",
+  "version": "1.1.1",
+  "description": "CoinPeek - Real-time crypto prices Chrome extension",
+  "private": true,
+  "scripts": {
+    "build": "node build.js",
+    "build:dev": "node build.js --dev"
+  },
+  "devDependencies": {
+    "archiver": "^5.3.1"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
