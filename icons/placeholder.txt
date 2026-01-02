@@ -1,0 +1,14 @@
+Extension Icons:
+✅ icon16.png (16x16 pixels) - Generated
+✅ icon48.png (48x48 pixels) - Generated  
+✅ icon128.png (128x128 pixels) - Generated
+
+Icons were generated using Bitcoin symbol (₿) with gradient background (#667eea → #764ba2).
+
+To regenerate icons:
+1. Open /dev-tools/create-icons.html in browser
+2. Click "Download" buttons for each size
+3. Save as icon16.png, icon48.png, icon128.png in this folder
+4. Reload extension to see changes
+
+Note: Icons use the same gradient as the extension UI for consistency.
