@@ -6,6 +6,8 @@
 
 A fast, lightweight Chrome extension that shows real-time Bitcoin price on the extension badge, plus ETH prices, gas fees, and a crypto converter.
 
+![CoinPeek Screenshot](images/1.png)
+
 ## 🚀 Features
 
 - **Real-time Prices**: Monitor Bitcoin and Ethereum prices with 24-hour change indicators
