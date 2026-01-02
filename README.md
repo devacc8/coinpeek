@@ -2,7 +2,7 @@
 
 [![Version](https://img.shields.io/badge/version-1.1.1-blue.svg)](https://github.com/devacc8/coinpeek/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Chrome Web Store](https://img.shields.io/badge/Chrome%20Web%20Store-Coming%20Soon-lightgrey.svg)]()
+[![Chrome Web Store](https://img.shields.io/badge/Chrome%20Web%20Store-Install-green.svg)](https://chromewebstore.google.com/detail/btc-price-bage-tracker/konlmcdlofpoegdkbjocdfojejmfkfbo)
 
 A fast, lightweight Chrome extension that shows real-time Bitcoin price on the extension badge, plus ETH prices, gas fees, and a crypto converter.
 
@@ -21,7 +21,7 @@ A fast, lightweight Chrome extension that shows real-time Bitcoin price on the e
 ## 📦 Installation
 
 ### From Chrome Web Store (Recommended)
-*[Future: Will be available on Chrome Web Store]*
+**[Install from Chrome Web Store](https://chromewebstore.google.com/detail/btc-price-bage-tracker/konlmcdlofpoegdkbjocdfojejmfkfbo)**
 
 ### Manual Installation (Developer Mode)
 1. Download or clone this repository
