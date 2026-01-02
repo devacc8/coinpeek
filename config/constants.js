@@ -18,13 +18,23 @@ const CONFIG = {
         TIME_DISPLAY: 1000, // 1 second
         INITIAL_DELAY: 2000, // 2 seconds
         ERROR_HIDE: 5000, // 5 seconds
-        DATA_FRESHNESS_THRESHOLD: 45000 // 45 seconds - считать данные устаревшими
+        DATA_FRESHNESS_THRESHOLD: 45000, // 45 seconds - data considered stale
+        FETCH_TIMEOUT: 10000, // 10 seconds - API request timeout
+        DEBOUNCE_DELAY: 300, // 300ms - input debounce
+        MIN_REQUEST_INTERVAL: 5000 // 5 seconds - minimum time between API calls
     },
-    
+
     // Retry configuration
     RETRY: {
         COUNT: 3,
-        DELAY: 1000 // milliseconds
+        DELAY: 1000, // milliseconds
+        BACKOFF_MULTIPLIER: 1.5 // exponential backoff
+    },
+
+    // Fee multipliers for Bitcoin gas estimation
+    FEE_MULTIPLIERS: {
+        STANDARD: 1.5,
+        FAST: 2
     },
     
     // Gas fee confidence levels
@@ -87,7 +97,8 @@ const CONFIG = {
     
     // Conversion settings
     CONVERSION: {
-        DECIMAL_PLACES: 8,
+        DECIMAL_PLACES_CRYPTO: 8, // For BTC/ETH amounts
+        DECIMAL_PLACES_USD: 2,    // For USD amounts
         MIN_AMOUNT: 0
     },
     
