@@ -1,19 +1,15 @@
-/* Modern Crypto Extension Styles */
+/* CoinPeek Extension Styles */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Кросс-браузерная нормализация для консистентного отображения шрифтов */
+/* Cross-browser normalization for consistent font rendering */
 html {
     -webkit-text-size-adjust: 100%;
     -moz-text-size-adjust: 100%;
     text-size-adjust: 100%;
-    /* Принудительное отключение минимального размера шрифта в браузерах */
-    -webkit-text-size-adjust: none;
-    -moz-text-size-adjust: none;
-    text-size-adjust: none;
 }
 
 :root {
@@ -144,18 +140,15 @@ body {
 }
 
 .updated-text {
-    font-size: 10px;  /* Увеличен с 8px до 10px для лучшей читаемости */
+    font-size: 10px;
     color: rgba(255, 255, 255, 0.7);
     font-weight: 400;
     text-transform: lowercase;
-    /* Обеспечение кросс-браузерной совместимости */
     -webkit-text-size-adjust: 100%;
     -moz-text-size-adjust: 100%;
     text-size-adjust: 100%;
-    /* Сглаживание шрифта для улучшения читаемости мелкого текста */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    /* Принудительное применение размера шрифта */
     min-height: 1em;
     line-height: 1.2;
 }
@@ -611,6 +604,8 @@ body {
 }
 
 .converter-arrow {
+    /* Button reset */
+    font-family: inherit;
     text-align: center;
     font-size: 16px;
     color: var(--text-secondary);
@@ -721,9 +716,8 @@ body {
         font-size: 14px;
     }
     
-    /* Обеспечение читаемости updated-text на маленьких экранах */
     .updated-text {
-        font-size: 9px;  /* Уменьшено только на маленьких экранах */
+        font-size: 9px;
         line-height: 1.1;
     }
 }
@@ -747,11 +741,11 @@ body {
 }
 
 /* Crypto Icons */
-.coin-icon[alt="Bitcoin"]::before {
+.coin-icon-btc::before {
     content: "₿";
 }
 
-.coin-icon[alt="Ethereum"]::before {
+.coin-icon-eth::before {
     content: "◊";
 }
 
@@ -797,4 +791,56 @@ body {
 *:focus-visible {
     outline: 2px solid rgba(102, 126, 234, 0.5);
     outline-offset: 2px;
+}
+
+/* Accessibility: visually hidden but accessible to screen readers */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Firefox scrollbar styling */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.3) rgba(255, 255, 255, 0.1);
+}
+
+/* Reduced motion preference for accessibility */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .header::before {
+        animation: none;
+    }
+
+    .status-dot {
+        animation: none;
+    }
+
+    .price-card:hover,
+    .converter-section:hover,
+    .gas-section:hover {
+        transform: none;
+    }
+
+    .header-controls .refresh-btn:hover {
+        transform: none;
+    }
+
+    .converter-arrow:hover {
+        transform: none;
+    }
 }

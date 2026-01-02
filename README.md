@@ -1,10 +1,10 @@
-# CoinPeek
+# CoinPeek - Bitcoin Price Badge & Gas Tracker
 
 [![Version](https://img.shields.io/badge/version-1.1.1-blue.svg)](https://github.com/devacc8/coinpeek/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Chrome Web Store](https://img.shields.io/badge/Chrome%20Web%20Store-Coming%20Soon-lightgrey.svg)]()
 
-A fast, lightweight Chrome extension for real-time cryptocurrency prices, gas fees, and conversion tools.
+A fast, lightweight Chrome extension that shows real-time Bitcoin price on the extension badge, plus ETH prices, gas fees, and a crypto converter.
 
 ## 🚀 Features
 
@@ -110,6 +110,31 @@ coinpeek/
 - **Local Storage Only**: All data stored locally in Chrome storage
 - **Secure APIs**: All API calls use HTTPS encryption
 - **Minimal Permissions**: Only requests necessary Chrome permissions
+- **Open Source**: Full source code available for review
+
+### Permissions Explained
+
+This extension requests only **two minimal permissions**:
+
+| Permission | Why It's Needed | What It Does |
+|------------|-----------------|--------------|
+| `storage` | Cache prices locally | Saves last known prices so you see data instantly when opening the popup. Data never leaves your device. |
+| `alarms` | Background updates | Refreshes prices every minute automatically. Uses Chrome's efficient alarm system, not a constant background process. |
+
+**Host Permissions** (API access only):
+| API | Purpose |
+|-----|---------|
+| `api.coingecko.com` | Fetch BTC/ETH prices (public API) |
+| `api.blocknative.com` | Fetch ETH gas fees |
+| `mempool.space` | Fetch BTC network fees |
+| `api.blockchain.info` | Fallback for BTC fees |
+| `api.blockchair.com` | Fallback for BTC fees |
+
+**What we DON'T request:**
+- No `<all_urls>` - we can't access your browsing
+- No `tabs` - we can't see your open tabs
+- No `history` - we can't see your browsing history
+- No `cookies` - we can't access your cookies
 
 ## 📋 Version History
 

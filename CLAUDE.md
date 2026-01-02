@@ -1,4 +1,6 @@
-# CoinPeek - Claude Context
+# CoinPeek - Bitcoin Price Badge & Gas Tracker
+
+## Claude Context
 
 ## Project Overview
 Chrome extension for real-time cryptocurrency monitoring (Bitcoin & Ethereum prices, gas fees, conversion tools).

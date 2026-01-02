@@ -1,46 +1,55 @@
-// Shared formatting utilities for Crypto Extension
+// Shared formatting utilities for CoinPeek Extension
 
 class Formatters {
     static formatPrice(price, decimals = 2) {
-        if (!price || isNaN(price)) return '$0.00';
-        
+        const num = Number(price);
+        if (!num || isNaN(num) || !isFinite(num)) return '$0.00';
+
         return new Intl.NumberFormat('en-US', {
             style: 'currency',
             currency: 'USD',
             minimumFractionDigits: decimals,
             maximumFractionDigits: decimals
-        }).format(price);
+        }).format(num);
     }
     
     static formatPercentChange(change) {
-        if (!change || isNaN(change)) return '0.00%';
-        
-        const formatted = Math.abs(change).toFixed(2);
-        const sign = change >= 0 ? '+' : '-';
+        const num = Number(change);
+        if (isNaN(num) || !isFinite(num)) return '0.00%';
+
+        const formatted = Math.abs(num).toFixed(2);
+        const sign = num >= 0 ? '+' : '-';
         return `${sign}${formatted}%`;
     }
     
     static formatBadgePrice(price) {
-        if (!price || isNaN(price)) return '';
-        
-        if (price >= 1000000) {
-            return Math.round(price / 1000000) + 'M';
-        } else if (price >= 1000) {
-            return Math.round(price / 1000) + 'K';
+        const num = Number(price);
+        if (!num || isNaN(num) || !isFinite(num) || num <= 0) return '';
+
+        if (num >= 1000000) {
+            return Math.round(num / 1000000) + 'M';
+        } else if (num >= 1000) {
+            return Math.round(num / 1000) + 'K';
         } else {
-            return Math.round(price).toString();
+            return Math.round(num).toString();
         }
     }
     
     static formatTimeAgo(timestamp) {
         if (!timestamp) return 'never';
-        
+
         const date = new Date(timestamp);
+        if (isNaN(date.getTime())) return 'never';
+
         const now = new Date();
         const diffMs = now - date;
+
+        // Handle future timestamps or invalid dates
+        if (diffMs < 0) return 'just now';
+
         const diffSecs = Math.floor(diffMs / 1000);
         const diffMins = Math.floor(diffMs / 60000);
-        
+
         if (diffSecs < 60) {
             return `${diffSecs} seconds ago`;
         } else if (diffMins < 60) {
@@ -51,31 +60,32 @@ class Formatters {
     }
     
     static validatePrice(price) {
-        return typeof price === 'number' && price > 0 && !isNaN(price);
+        return typeof price === 'number' && price > 0 && !isNaN(price) && isFinite(price);
     }
-    
+
     static validatePercentChange(change) {
-        return typeof change === 'number' && !isNaN(change);
+        return typeof change === 'number' && !isNaN(change) && isFinite(change);
     }
     
     // Debug logging utility
-    static log(level, message, data = null) {
+    static log(level, message, data) {
         if (typeof CONFIG !== 'undefined' && CONFIG.DEBUG && CONFIG.DEBUG.ENABLED) {
             const timestamp = new Date().toISOString();
             const logMessage = `[${timestamp}] ${level.toUpperCase()}: ${message}`;
-            
+            const hasData = arguments.length > 2 && data !== undefined;
+
             switch (level.toLowerCase()) {
                 case 'error':
-                    console.error(logMessage, data);
+                    hasData ? console.error(logMessage, data) : console.error(logMessage);
                     break;
                 case 'warn':
-                    console.warn(logMessage, data);
+                    hasData ? console.warn(logMessage, data) : console.warn(logMessage);
                     break;
                 case 'info':
-                    console.info(logMessage, data);
+                    hasData ? console.info(logMessage, data) : console.info(logMessage);
                     break;
                 default:
-                    console.log(logMessage, data);
+                    hasData ? console.log(logMessage, data) : console.log(logMessage);
             }
         }
     }
