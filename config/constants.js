@@ -4,7 +4,8 @@ const CONFIG = {
     // API URLs
     API_URLS: {
         COINGECKO: 'https://api.coingecko.com/api/v3',
-        BLOCKNATIVE: 'https://api.blocknative.com',
+        OWLCRACLE: 'https://api.owlracle.info/v4',
+        ETH_RPC: 'https://ethereum-rpc.publicnode.com',
         COINCAP: 'https://api.coincap.io/v2',
         MEMPOOL: 'https://mempool.space/api/v1',
         BLOCKCHAIN_INFO: 'https://api.blockchain.info',
@@ -36,25 +37,25 @@ const CONFIG = {
         STANDARD: 1.5,
         FAST: 2
     },
+
+    // Bitcoin does not relay a transaction below this fee, so a source reporting
+    // a lower number is skipped and the next source is tried instead.
+    MIN_RELAY_FEE_SAT_VB: 1,
     
-    // Gas fee confidence levels
-    GAS_CONFIDENCE: {
-        LOW: 70,
-        STANDARD: 80,
-        FAST: 95
-    },
-    
-    // Default gas values (fallback)
+    // Last-resort gas values, used only when every live source fails. Ethereum
+    // fees move by orders of magnitude (0.06 gwei in 2026 against 20 gwei in
+    // 2022), so a hardcoded gwei number would mislead more than an empty
+    // reading, and the popup renders null as a dash.
     DEFAULT_GAS: {
         ETHEREUM: {
-            LOW: 15,
-            STANDARD: 20,
-            FAST: 25
+            low: null,
+            standard: null,
+            fast: null
         },
         BITCOIN: {
-            LOW: 10,
-            STANDARD: 20,
-            FAST: 30
+            low: 1,
+            standard: 2,
+            fast: 3
         }
     },
     

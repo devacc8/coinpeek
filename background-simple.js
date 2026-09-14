@@ -12,12 +12,12 @@ class SimpleApiService {
     }
 
     // Fetch with timeout and response validation
-    async fetchWithTimeout(url, timeout = CONFIG.UPDATE_INTERVALS.FETCH_TIMEOUT) {
+    async fetchWithTimeout(url, timeout = CONFIG.UPDATE_INTERVALS.FETCH_TIMEOUT, options = {}) {
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), timeout);
 
         try {
-            const response = await fetch(url, { signal: controller.signal });
+            const response = await fetch(url, { ...options, signal: controller.signal });
             clearTimeout(timeoutId);
 
             if (!response.ok) {
@@ -124,52 +124,127 @@ class SimpleApiService {
         }
     }
 
+    /**
+     * Ethereum gas, from two live sources. Blocknative's gas API was shut down
+     * on 2026-06-19, so the single source this used to have is gone, and with it
+     * the confidence levels the old response carried.
+     *
+     * @returns {Promise<{low: number|null, standard: number|null, fast: number|null}>}
+     */
     async fetchEthereumGas() {
+        const fromOwlracle = await this.fetchEthereumGasFromOwlracle();
+        if (fromOwlracle) return fromOwlracle;
+
+        const fromRpc = await this.fetchEthereumGasFromRpc();
+        if (fromRpc) return fromRpc;
+
+        Formatters.log('warn', 'Ethereum gas: no source answered');
+        return CONFIG.DEFAULT_GAS.ETHEREUM;
+    }
+
+    /**
+     * Owlracle reports one entry per acceptance probability, and its top tier
+     * (acceptance 1.0) prices a transaction that cannot fail, which runs an
+     * order of magnitude above what anyone pays: 1.06 gwei against 0.10 at
+     * acceptance 0.9, measured on 2026-09-14. So each row is matched to the
+     * entry whose acceptance is closest to a target instead of to the extremes.
+     *
+     * @returns {Promise<{low: number, standard: number, fast: number}|null>}
+     */
+    async fetchEthereumGasFromOwlracle() {
+        const targets = { low: 0.35, standard: 0.6, fast: 0.9 };
+
         try {
-            const data = await this.fetchWithTimeout(
-                `${CONFIG.API_URLS.BLOCKNATIVE}/gasprices/blockprices?chainid=1`
-            );
+            const data = await this.fetchWithTimeout(`${CONFIG.API_URLS.OWLCRACLE}/eth/gas`, 5000);
+            const speeds = (Array.isArray(data?.speeds) ? data.speeds : [])
+                .map((speed) => ({
+                    acceptance: Number(speed?.acceptance),
+                    price: Number(speed?.maxFeePerGas)
+                }))
+                .filter((speed) => Number.isFinite(speed.acceptance) && Number.isFinite(speed.price) && speed.price > 0);
 
-            if (data?.blockPrices?.[0]?.estimatedPrices) {
-                const gasData = data.blockPrices[0].estimatedPrices;
-                if (!Array.isArray(gasData)) throw new Error('Invalid gas data format');
+            if (speeds.length === 0) throw new Error('no usable price');
 
-                return {
-                    low: gasData.find(p => p.confidence === CONFIG.GAS_CONFIDENCE.LOW)?.price || CONFIG.DEFAULT_GAS.ETHEREUM.LOW,
-                    standard: gasData.find(p => p.confidence === CONFIG.GAS_CONFIDENCE.STANDARD)?.price || CONFIG.DEFAULT_GAS.ETHEREUM.STANDARD,
-                    fast: gasData.find(p => p.confidence === CONFIG.GAS_CONFIDENCE.FAST)?.price || CONFIG.DEFAULT_GAS.ETHEREUM.FAST
-                };
-            }
-            throw new Error('Invalid gas data structure');
+            // Three decimals below 0.1, because a quiet chain prices gas around
+            // 0.05 gwei and two decimals would flatten the rows into one number.
+            const round = (value) => Number(value.toFixed(value < 0.1 ? 3 : 2));
+            const nearest = (target) => speeds.reduce((best, speed) => (
+                Math.abs(speed.acceptance - target) < Math.abs(best.acceptance - target) ? speed : best
+            )).price;
+
+            Formatters.log('info', 'Ethereum gas from owlracle.info');
+            return {
+                low: round(nearest(targets.low)),
+                standard: round(nearest(targets.standard)),
+                fast: round(nearest(targets.fast))
+            };
         } catch (error) {
-            Formatters.log('warn', 'Ethereum gas fetch failed:', error.message);
-            return CONFIG.DEFAULT_GAS.ETHEREUM;
+            Formatters.log('warn', 'owlracle.info failed:', error.message);
+            return null;
+        }
+    }
+
+    /**
+     * The backup is a public JSON-RPC node: one eth_gasPrice in wei, split into
+     * the three rows the popup has. The multipliers are deliberately mild, since
+     * a node answer is a spot price and this is the fallback, not the oracle.
+     *
+     * @returns {Promise<{low: number, standard: number, fast: number}|null>}
+     */
+    async fetchEthereumGasFromRpc() {
+        try {
+            const data = await this.fetchWithTimeout(CONFIG.API_URLS.ETH_RPC, 5000, {
+                method: 'POST',
+                headers: { 'content-type': 'application/json' },
+                body: JSON.stringify({ jsonrpc: '2.0', id: 1, method: 'eth_gasPrice', params: [] })
+            });
+
+            const wei = Number.parseInt(data?.result ?? '', 16);
+            if (!Number.isFinite(wei) || wei <= 0) throw new Error('unexpected result');
+
+            const gwei = wei / 1e9;
+            const round = (value) => Number(value.toFixed(2));
+
+            Formatters.log('info', 'Ethereum gas from a public RPC node');
+            return { low: round(gwei), standard: round(gwei * 1.15), fast: round(gwei * 1.4) };
+        } catch (error) {
+            Formatters.log('warn', 'public RPC failed:', error.message);
+            return null;
         }
     }
 
     async fetchBitcoinGas() {
+        // 0 sat/vB is what a quiet mempool reports, but a transaction below the
+        // 1 sat/vB relay minimum never leaves the node, so a source that reports
+        // 0 is skipped and the next one is tried.
+        const feeNumber = (value) => {
+            const number = Number(value);
+            return Number.isFinite(number) && number >= 0 ? Math.round(number) : null;
+        };
+
         const apis = [
             {
                 name: 'mempool.space',
                 url: `${CONFIG.API_URLS.MEMPOOL}/fees/recommended`,
                 parser: (data) => {
-                    if (!data?.hourFee || !data?.halfHourFee || !data?.fastestFee) return null;
-                    return {
-                        low: Math.round(Number(data.hourFee)),
-                        standard: Math.round(Number(data.halfHourFee)),
-                        fast: Math.round(Number(data.fastestFee))
-                    };
+                    const low = feeNumber(data?.hourFee);
+                    const standard = feeNumber(data?.halfHourFee);
+                    const fast = feeNumber(data?.fastestFee);
+                    if (low === null || standard === null || fast === null) return null;
+                    return { low, standard, fast };
                 }
             },
             {
                 name: 'blockchain.info',
                 url: `${CONFIG.API_URLS.BLOCKCHAIN_INFO}/mempool/fees`,
                 parser: (data) => {
-                    if (!data?.regular || !data?.priority) return null;
+                    const low = feeNumber(data?.regular);
+                    const standard = feeNumber(data?.priority);
+                    if (low === null || standard === null) return null;
                     return {
-                        low: Math.round(Number(data.regular)),
-                        standard: Math.round(Number(data.priority)),
-                        fast: Math.round(Number(data.priority) * CONFIG.FEE_MULTIPLIERS.STANDARD)
+                        low,
+                        standard,
+                        fast: Math.round(standard * CONFIG.FEE_MULTIPLIERS.STANDARD)
                     };
                 }
             },
@@ -177,12 +252,12 @@ class SimpleApiService {
                 name: 'blockchair.com',
                 url: `${CONFIG.API_URLS.BLOCKCHAIR}/bitcoin/stats`,
                 parser: (data) => {
-                    const fee = data?.data?.suggested_transaction_fee_per_byte_sat;
-                    if (!fee) return null;
+                    const fee = feeNumber(data?.data?.suggested_transaction_fee_per_byte_sat);
+                    if (fee === null) return null;
                     return {
-                        low: Math.round(Number(fee)),
-                        standard: Math.round(Number(fee) * CONFIG.FEE_MULTIPLIERS.STANDARD),
-                        fast: Math.round(Number(fee) * CONFIG.FEE_MULTIPLIERS.FAST)
+                        low: fee,
+                        standard: Math.round(fee * CONFIG.FEE_MULTIPLIERS.STANDARD),
+                        fast: Math.round(fee * CONFIG.FEE_MULTIPLIERS.FAST)
                     };
                 }
             }
@@ -193,7 +268,7 @@ class SimpleApiService {
                 const data = await this.fetchWithTimeout(api.url, 5000);
                 const result = api.parser(data);
 
-                if (result && result.low > 0 && result.standard > 0 && result.fast > 0) {
+                if (result && ['low', 'standard', 'fast'].every((key) => Number.isFinite(result[key]) && result[key] >= CONFIG.MIN_RELAY_FEE_SAT_VB)) {
                     Formatters.log('info', `Bitcoin gas from ${api.name}`);
                     return result;
                 }
@@ -203,7 +278,7 @@ class SimpleApiService {
         }
 
         Formatters.log('warn', 'All Bitcoin gas APIs failed');
-        return null;
+        return CONFIG.DEFAULT_GAS.BITCOIN;
     }
 }
 

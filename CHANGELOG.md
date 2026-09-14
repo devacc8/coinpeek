@@ -2,6 +2,19 @@
 
 All notable changes to CoinPeek will be documented in this file.
 
+## [1.1.2] - 2026-09-14
+
+### Network fee fixes
+
+#### Fixed
+- **Ethereum network fees**: the gas API this used, Blocknative, was shut down on 19 June 2026, so the Ethereum row could not load at all. It now reads from Owlracle, with a public JSON-RPC node as the backup.
+- **Silent fallback**: the built-in fallback used uppercase keys (LOW, STANDARD, FAST) while the popup reads lowercase ones, so an unavailable reading rendered as a dash instead of a number. The keys now match. The Ethereum fallback values are null on purpose, because a hardcoded gwei number is wrong by orders of magnitude, so a dash is the honest answer when no source responds.
+- **Zero fees from a source are skipped**: `blockchain.info` reports a regular fee of 0 sat/vB whenever the mempool is quiet, and the old check treated that as valid. Bitcoin does not relay below 1 sat/vB, so a source reporting less than that is now skipped and the next source is tried, with the built-in 1/2/3 sat/vB values as the last resort.
+- **Bitcoin fallback**: a failed reading now returns the built-in values instead of nothing.
+
+#### Changed
+- Host permissions: `api.blocknative.com` removed, `api.owlracle.info` and `ethereum-rpc.publicnode.com` added.
+
 ## [1.1.1] - 2025-07-19
 
 ### 🔧 Bug Fixes & Stability Improvements
