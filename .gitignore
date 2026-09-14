@@ -27,3 +27,7 @@ npm-debug.log*
 
 # Optional: lock file (uncomment if needed)
 # package-lock.json
+
+# Instruction files stay local: AGENTS.md for agents, CLAUDE.md retired
+CLAUDE.md
+AGENTS.md

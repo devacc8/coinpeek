@@ -19,6 +19,7 @@ class ExtensionBuilder {
             '.git',
             '.gitignore',
             'CLAUDE.md',
+            'AGENTS.md',
             'CHANGELOG.md', 
             'README.md',
             'PRIVACY_POLICY.md',
