@@ -33,7 +33,8 @@ The extension fetches public data from the following APIs:
 | Service | Purpose | Data Sent |
 |---------|---------|-----------|
 | [CoinGecko](https://www.coingecko.com/) | Cryptocurrency prices | None (public API) |
-| [Blocknative](https://www.blocknative.com/) | Ethereum gas fees | None (public API) |
+| [Owlracle](https://owlracle.info/) | Ethereum gas fees | None (public API) |
+| [PublicNode](https://www.publicnode.com/) | Ethereum gas fees (fallback) | None (public API) |
 | [mempool.space](https://mempool.space/) | Bitcoin fees | None (public API) |
 | [blockchain.info](https://www.blockchain.com/) | Bitcoin fees (fallback) | None (public API) |
 | [Blockchair](https://blockchair.com/) | Bitcoin fees (fallback) | None (public API) |

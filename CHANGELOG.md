@@ -2,6 +2,16 @@
 
 All notable changes to CoinPeek will be documented in this file.
 
+## [1.1.3] - 2026-09-14
+
+### Documentation and permissions
+
+#### Fixed
+- **Privacy policy and README**: both still named Blocknative as the Ethereum gas source after 1.1.2 replaced it. They now name Owlracle and the public JSON-RPC node, which is what the extension actually contacts.
+
+#### Changed
+- Removed the `api.coincap.io` host permission. The code never called it, and an unused permission only adds a warning at install.
+
 ## [1.1.2] - 2026-09-14
 
 ### Network fee fixes

@@ -6,7 +6,6 @@ const CONFIG = {
         COINGECKO: 'https://api.coingecko.com/api/v3',
         OWLCRACLE: 'https://api.owlracle.info/v4',
         ETH_RPC: 'https://ethereum-rpc.publicnode.com',
-        COINCAP: 'https://api.coincap.io/v2',
         MEMPOOL: 'https://mempool.space/api/v1',
         BLOCKCHAIN_INFO: 'https://api.blockchain.info',
         BLOCKCHAIR: 'https://api.blockchair.com'

@@ -64,7 +64,7 @@ A fast, lightweight Chrome extension that shows real-time Bitcoin price on the e
 | Service | Purpose | Fallback Available |
 |---------|---------|-------------------|
 | **CoinGecko** | BTC/ETH prices | ❌ (Primary only) |
-| **Blocknative** | Ethereum gas fees | ✅ (Default values) |
+| **Owlracle** | Ethereum gas fees | ✅ (public RPC node) |
 | **mempool.space** | Bitcoin gas fees | ✅ (2 additional APIs) |
 
 ### Reliability Features
@@ -127,7 +127,8 @@ This extension requests only **two minimal permissions**:
 | API | Purpose |
 |-----|---------|
 | `api.coingecko.com` | Fetch BTC/ETH prices (public API) |
-| `api.blocknative.com` | Fetch ETH gas fees |
+| `api.owlracle.info` | Fetch ETH gas fees |
+| `ethereum-rpc.publicnode.com` | Fallback for ETH gas fees |
 | `mempool.space` | Fetch BTC network fees |
 | `api.blockchain.info` | Fallback for BTC fees |
 | `api.blockchair.com` | Fallback for BTC fees |
