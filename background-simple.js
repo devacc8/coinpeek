@@ -144,10 +144,10 @@ class SimpleApiService {
 
     /**
      * Owlracle reports one entry per acceptance probability, and its top tier
-     * (acceptance 1.0) prices a transaction that cannot fail, which runs an
-     * order of magnitude above what anyone pays: 1.06 gwei against 0.10 at
-     * acceptance 0.9, measured on 2026-09-14. So each row is matched to the
-     * entry whose acceptance is closest to a target instead of to the extremes.
+     * (acceptance 1.0) prices a transaction that cannot fail, which runs
+     * several times above the tier anyone actually pays at. So each row is
+     * matched to the entry whose acceptance is closest to a target instead of
+     * to the extremes.
      *
      * @returns {Promise<{low: number, standard: number, fast: number}|null>}
      */
