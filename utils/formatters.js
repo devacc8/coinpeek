@@ -9,25 +9,28 @@ class Formatters {
 
 
     /**
-     * Format a USD price. The default is whole dollars: cents on a four or five
-     * digit price are noise, the card placeholder in the markup is `$--,---`,
-     * and the badge tooltip has to stay short. Callers that need fractions
-     * (the converter, for crypto amounts) pass an explicit count.
+     * Format a USD price as `$76,955`.
+     *
+     * The dollar sign always leads and the digits always group with commas,
+     * in every language. Locale currency formatting was tried first and it
+     * disagreed with the layout: Russian put the sign last with a thin space
+     * between the groups, Spanish and Chinese wrote US$, and the card is built
+     * around the `$--,---` placeholder. A price is read at a glance, so one
+     * shape everywhere beats four correct ones.
+     *
+     * The default is whole dollars: cents on a four or five digit price are
+     * noise, and the badge tooltip has to stay short. Callers that need
+     * fractions (the converter) pass an explicit count.
      */
     static formatPrice(price, decimals = 0) {
         const num = Number(price);
         const safe = !num || isNaN(num) || !isFinite(num) ? 0 : num;
-
-        return new Intl.NumberFormat(Formatters.locale(), {
-            style: 'currency',
-            currency: 'USD',
-            // Locale defaults disagree here: Spanish and Chinese render USD as
-            // "US$". The cards were designed around a plain "$", and a dollar
-            // sign is unambiguous for a dollar price.
-            currencyDisplay: 'narrowSymbol',
+        const digits = new Intl.NumberFormat('en-US', {
             minimumFractionDigits: decimals,
             maximumFractionDigits: decimals
         }).format(safe);
+
+        return `$${digits}`;
     }
     
     static formatPercentChange(change) {

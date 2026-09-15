@@ -3,6 +3,7 @@ import assert from 'node:assert/strict'
 import { readFileSync, readdirSync, statSync } from 'node:fs'
 import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { createContext, runInContext } from 'node:vm'
 
 /**
  * The i18n contract. Nothing here needs a browser: the catalogues, the markup
@@ -92,4 +93,21 @@ test('placeholders are declared and referenced in the message', () => {
       }
     }
   }
+})
+
+test('prices are printed as $76,955 whatever the language', () => {
+  // The formatter is a classic script, so it is evaluated the way the browser
+  // does it: in its own realm, with only the i18n helper injected. The locale
+  // is Russian on purpose, because that is the one that used to put the sign
+  // last and group the digits with a thin space.
+  const context = createContext({ I18N: { t: (key) => (key === 'localeCode' ? 'ru' : key) } })
+  runInContext(readFileSync(join(ROOT, 'utils', 'formatters.js'), 'utf8'), context)
+  const Formatters = runInContext('Formatters', context)
+
+  assert.equal(Formatters.formatPrice(76955), '$76,955')
+  assert.equal(Formatters.formatPrice(76955.4, 2), '$76,955.40')
+  assert.equal(Formatters.formatPrice(1234567), '$1,234,567')
+  assert.equal(Formatters.formatPrice(undefined), '$0')
+  assert.ok(!Formatters.formatPrice(76955).includes('\u00a0'), 'expected no non-breaking space')
+  assert.ok(!Formatters.formatPrice(76955).includes('US$'), 'expected no US$ prefix')
 })

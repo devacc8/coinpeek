@@ -16,7 +16,7 @@ All notable changes to CoinPeek will be documented in this file.
 - **Privacy policy and README**: both still named Blocknative as the Ethereum gas source after 1.1.2 replaced it. They now name Owlracle and the public JSON-RPC node, which is what the extension actually contacts.
 
 #### Changed
-- **Prices are whole dollars.** The cards and the badge tooltip showed cents, which is noise on a five digit price and did not match the `$--,---` placeholder the layout was built around. Prices now follow the resolved locale (76 955 $ in Russian, 76.955 $ in Spanish) and use a narrow dollar sign, rather than the US$ some locales prefer.
+- **Prices read `$76,955` in every language.** The dollar sign leads and the digits group with commas. Locale currency formatting was tried first and disagreed with the layout: Russian put the sign last with a thin space between the groups, Spanish and Chinese wrote `US$`, while the card is built around the `$--,---` placeholder. Cents are gone from the cards and from the badge tooltip.
 - Removed the `api.coincap.io` host permission. The code never called it, and an unused permission only adds a warning at install.
 
 ## [1.1.2] - 2026-09-14
