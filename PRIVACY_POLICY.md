@@ -1,7 +1,7 @@
 # Privacy Policy
 
 **CoinPeek**
-*Last updated: January 2025*
+*Last updated: 14 September 2026*
 
 ## Overview
 

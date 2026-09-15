@@ -1,6 +1,6 @@
 # CoinPeek - Bitcoin Price Badge & Gas Tracker
 
-[![Version](https://img.shields.io/badge/version-1.1.1-blue.svg)](https://github.com/devacc8/coinpeek/releases)
+[![Version](https://img.shields.io/badge/version-1.1.3-blue.svg)](https://github.com/devacc8/coinpeek/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Chrome Web Store](https://img.shields.io/badge/Chrome%20Web%20Store-Install-green.svg)](https://chromewebstore.google.com/detail/coinpeek-bitcoin-price-ba/konlmcdlofpoegdkbjocdfojejmfkfbo)
 
@@ -86,12 +86,14 @@ coinpeek/
 ├── config/
 │   └── constants.js        # Centralized configuration
 ├── utils/
-│   └── formatters.js       # Shared utilities
+│   ├── formatters.js       # Shared formatting helpers
+│   └── i18n.js             # Message lookup for the four locales
+├── _locales/               # en, ru, zh_CN, es message catalogues
 ├── icons/                  # Extension icons (16, 48, 128px)
-├── dev-tools/              # Development utilities (optional)
-└── docs/
-    ├── README.md           # This file
-    └── TECHNICAL_DOCS.md   # Developer documentation
+├── docs/
+│   └── STORE.md            # Store listing copy in four languages
+├── README.md               # This file
+└── TECHNICAL_DOCS.md       # Developer documentation
 ```
 
 ### Development Setup
@@ -141,7 +143,7 @@ This extension requests only **two minimal permissions**:
 
 ## 📋 Version History
 
-### v1.1.1 (Current)
+### v1.1.3 (Current)
 - 🔧 Fixed Bitcoin badge not displaying on extension icon
 - 🌐 Improved CoinGecko API reliability with response validation
 - ⚡ Intelligent data refresh (only when data >45s old)

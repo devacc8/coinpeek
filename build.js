@@ -10,29 +10,25 @@ class ExtensionBuilder {
         this.buildDir = path.join(this.sourceDir, 'build');
         this.distDir = path.join(this.sourceDir, 'dist');
         
-        // Files and directories to exclude from build
-        this.excludePatterns = [
-            'build.js',
-            'package.json',
-            'package-lock.json',
-            'node_modules',
-            '.git',
-            '.gitignore',
-            'CLAUDE.md',
-            'AGENTS.md',
-            'CHANGELOG.md', 
-            'README.md',
-            'PRIVACY_POLICY.md',
-            'CONTRIBUTING.md',
-            'LICENSE',
-            'TECHNICAL_DOCS.md',
-            'to-do.txt',
-            'dev-tools',
-            'doc_internal',
-            '.claude',
-            'build',
-            'dist'
+        // Only these paths are shipped in the extension package. This is an
+        // include list rather than an exclude list on purpose: anything new in
+        // the repository (internal docs, store screenshots, editor leftovers) is
+        // then left out by default instead of leaking into the published
+        // package. The published 1.1.2 shipped docs/ and 568 KB of screenshots
+        // because a new folder only had to be forgotten once.
+        this.includePatterns = [
+            'manifest.json',
+            'background-simple.js',
+            'popup',
+            'config',
+            'utils',
+            'icons',
+            '_locales'
         ];
+
+        // Windows writes these beside every file it downloads. They are not part
+        // of the extension and they were reaching the published package.
+        this.junkPattern = /:Zone\.Identifier$/;
         
         this.requiredManifestFields = [
             'name',
@@ -59,22 +55,22 @@ class ExtensionBuilder {
         console.log('✅ Directories created');
     }
 
-    // Check if file/directory should be excluded
-    shouldExclude(fileName) {
-        return this.excludePatterns.some(pattern => {
-            if (fileName === pattern) return true;
-            if (fileName.startsWith(pattern + '/')) return true;
-            return false;
-        });
+    // Check if a path (relative to the repository root) stays out of the package
+    shouldExclude(relativePath) {
+        if (this.junkPattern.test(relativePath)) return true;
+        return !this.includePatterns.some(pattern =>
+            relativePath === pattern || relativePath.startsWith(pattern + '/')
+        );
     }
 
-    // Copy files recursively, excluding unwanted files
-    copyFiles(srcDir, destDir) {
+    // Copy files recursively, keeping only what the include list allows
+    copyFiles(srcDir, destDir, relative = '') {
         const items = fs.readdirSync(srcDir);
         
         for (const item of items) {
-            if (this.shouldExclude(item)) {
-                console.log(`⏭️  Skipping: ${item}`);
+            const relativePath = relative ? `${relative}/${item}` : item;
+            if (this.shouldExclude(relativePath)) {
+                console.log(`⏭️  Skipping: ${relativePath}`);
                 continue;
             }
             
@@ -84,7 +80,7 @@ class ExtensionBuilder {
             
             if (stat.isDirectory()) {
                 fs.mkdirSync(destPath, { recursive: true });
-                this.copyFiles(srcPath, destPath);
+                this.copyFiles(srcPath, destPath, relativePath);
             } else {
                 fs.copyFileSync(srcPath, destPath);
                 console.log(`📄 Copied: ${item}`);

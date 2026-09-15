@@ -98,5 +98,13 @@
   },
   "localeCode": {
     "message": "en"
+  },
+  "badgeTooltip": {
+    "message": "Bitcoin: $PRICE$",
+    "placeholders": {
+      "price": {
+        "content": "$1"
+      }
+    }
   }
 }

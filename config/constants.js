@@ -92,7 +92,6 @@ const CONFIG = {
     // Badge configuration
     BADGE: {
         COLOR: '#667eea',
-        TOOLTIP_PREFIX: 'Bitcoin: '
     },
     
     // Conversion settings

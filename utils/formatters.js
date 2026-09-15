@@ -1,11 +1,18 @@
 // Shared formatting utilities for CoinPeek Extension
 
 class Formatters {
+    /** The locale Chrome resolved for this extension, or US English outside it. */
+    static locale() {
+        const code = typeof I18N !== 'undefined' ? I18N.t('localeCode') : '';
+        return code && code !== 'localeCode' ? code : 'en-US';
+    }
+
+
     static formatPrice(price, decimals = 2) {
         const num = Number(price);
         if (!num || isNaN(num) || !isFinite(num)) return '$0.00';
 
-        return new Intl.NumberFormat('en-US', {
+        return new Intl.NumberFormat(Formatters.locale(), {
             style: 'currency',
             currency: 'USD',
             minimumFractionDigits: decimals,
@@ -55,7 +62,7 @@ class Formatters {
         } else if (diffMins < 60) {
             return I18N.t('timeMinutesAgo', [String(diffMins)]);
         } else {
-            return date.toLocaleTimeString();
+            return date.toLocaleTimeString(Formatters.locale());
         }
     }
     

@@ -309,7 +309,7 @@ function updateBadge(price) {
         const badgeText = Formatters.formatBadgePrice(numPrice);
         chrome.action.setBadgeText({ text: badgeText });
         chrome.action.setBadgeBackgroundColor({ color: CONFIG.BADGE.COLOR });
-        chrome.action.setTitle({ title: `${CONFIG.BADGE.TOOLTIP_PREFIX}${Formatters.formatPrice(numPrice)}` });
+        chrome.action.setTitle({ title: I18N.t('badgeTooltip', [Formatters.formatPrice(numPrice)]) });
         Formatters.log('info', 'Badge updated:', badgeText);
     } catch (error) {
         Formatters.log('error', 'Error updating badge:', error.message);

@@ -31,3 +31,6 @@ npm-debug.log*
 # Instruction files stay local: AGENTS.md for agents, CLAUDE.md retired
 CLAUDE.md
 AGENTS.md
+
+# Windows download metadata
+*:Zone.Identifier

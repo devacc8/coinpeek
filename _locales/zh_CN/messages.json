@@ -98,5 +98,13 @@
   },
   "localeCode": {
     "message": "zh-CN"
+  },
+  "badgeTooltip": {
+    "message": "比特币：$PRICE$",
+    "placeholders": {
+      "price": {
+        "content": "$1"
+      }
+    }
   }
 }

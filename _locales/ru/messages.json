@@ -98,5 +98,13 @@
   },
   "localeCode": {
     "message": "ru"
+  },
+  "badgeTooltip": {
+    "message": "Биткоин: $PRICE$",
+    "placeholders": {
+      "price": {
+        "content": "$1"
+      }
+    }
   }
 }
