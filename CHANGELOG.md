@@ -9,12 +9,14 @@ All notable changes to CoinPeek will be documented in this file.
 #### Added
 - **English, Russian, Chinese (Simplified) and Spanish.** The popup, the time strings, the currency names, the badge tooltip and the extension name and description follow the browser UI language, which Chrome resolves from `_locales` with English as the default. Every user visible string goes through `utils/i18n.js`, and prices and times are formatted in the locale that was resolved.
 - The popup page declares the language it is rendered in, through a `localeCode` entry in each catalogue, instead of the hardcoded `lang="en"`.
+- **Tests.** `npm test` now runs the i18n contract: the four catalogues must carry the same non-empty keys, every key referenced from the markup, the code and the manifest must exist in all of them, no catalogue key may go unused, and every placeholder must be declared and used.
 
 #### Fixed
 - **Currency names stayed English in a localized popup**: the "from" list is static markup, so only the list that JavaScript rebuilds picked up the catalogue. The static options carry `data-i18n` now.
 - **Privacy policy and README**: both still named Blocknative as the Ethereum gas source after 1.1.2 replaced it. They now name Owlracle and the public JSON-RPC node, which is what the extension actually contacts.
 
 #### Changed
+- **Prices are whole dollars.** The cards and the badge tooltip showed cents, which is noise on a five digit price and did not match the `$--,---` placeholder the layout was built around. Prices now follow the resolved locale (76 955 $ in Russian, 76.955 $ in Spanish) and use a narrow dollar sign, rather than the US$ some locales prefer.
 - Removed the `api.coincap.io` host permission. The code never called it, and an unused permission only adds a warning at install.
 
 ## [1.1.2] - 2026-09-14

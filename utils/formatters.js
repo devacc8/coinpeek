@@ -8,16 +8,26 @@ class Formatters {
     }
 
 
-    static formatPrice(price, decimals = 2) {
+    /**
+     * Format a USD price. The default is whole dollars: cents on a four or five
+     * digit price are noise, the card placeholder in the markup is `$--,---`,
+     * and the badge tooltip has to stay short. Callers that need fractions
+     * (the converter, for crypto amounts) pass an explicit count.
+     */
+    static formatPrice(price, decimals = 0) {
         const num = Number(price);
-        if (!num || isNaN(num) || !isFinite(num)) return '$0.00';
+        const safe = !num || isNaN(num) || !isFinite(num) ? 0 : num;
 
         return new Intl.NumberFormat(Formatters.locale(), {
             style: 'currency',
             currency: 'USD',
+            // Locale defaults disagree here: Spanish and Chinese render USD as
+            // "US$". The cards were designed around a plain "$", and a dollar
+            // sign is unambiguous for a dollar price.
+            currencyDisplay: 'narrowSymbol',
             minimumFractionDigits: decimals,
             maximumFractionDigits: decimals
-        }).format(num);
+        }).format(safe);
     }
     
     static formatPercentChange(change) {
