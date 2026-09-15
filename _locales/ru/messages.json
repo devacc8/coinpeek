@@ -1,0 +1,102 @@
+{
+  "extName": {
+    "message": "CoinPeek"
+  },
+  "extDesc": {
+    "message": "Курсы BTC и ETH на значке, комиссии сети для обеих сетей и конвертер валют."
+  },
+  "pageTitle": {
+    "message": "CoinPeek - цена биткоина и комиссии сети"
+  },
+  "refreshTitle": {
+    "message": "Обновить данные"
+  },
+  "refreshAria": {
+    "message": "Обновить данные о криптовалютах"
+  },
+  "updatedLabel": {
+    "message": "обновлено"
+  },
+  "neverLabel": {
+    "message": "никогда"
+  },
+  "networkFees": {
+    "message": "Комиссии сети:"
+  },
+  "bitcoinName": {
+    "message": "Биткоин"
+  },
+  "ethereumName": {
+    "message": "Эфириум"
+  },
+  "bitcoinPriceAria": {
+    "message": "Информация о цене биткоина"
+  },
+  "bitcoinIconAria": {
+    "message": "Значок биткоина"
+  },
+  "ethereumPriceAria": {
+    "message": "Информация о цене эфириума"
+  },
+  "ethereumIconAria": {
+    "message": "Значок эфириума"
+  },
+  "quickConvert": {
+    "message": "Быстрый расчёт"
+  },
+  "swapCurrencies": {
+    "message": "Поменять валюты"
+  },
+  "converterAria": {
+    "message": "Конвертер валют"
+  },
+  "fromCurrency": {
+    "message": "Из валюты"
+  },
+  "sourceCurrency": {
+    "message": "Исходная валюта"
+  },
+  "amountToConvert": {
+    "message": "Сумма для конвертации"
+  },
+  "toCurrency": {
+    "message": "В валюту"
+  },
+  "targetCurrency": {
+    "message": "Целевая валюта"
+  },
+  "convertedAmount": {
+    "message": "Результат конвертации"
+  },
+  "usdLabel": {
+    "message": "USD"
+  },
+  "errorUpdateFailed": {
+    "message": "Не удалось обновить курсы. Попробуйте ещё раз."
+  },
+  "timeNever": {
+    "message": "никогда"
+  },
+  "timeJustNow": {
+    "message": "только что"
+  },
+  "timeSecondsAgo": {
+    "message": "$COUNT$ сек. назад",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "timeMinutesAgo": {
+    "message": "$COUNT$ мин. назад",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "localeCode": {
+    "message": "ru"
+  }
+}

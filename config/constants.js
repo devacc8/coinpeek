@@ -60,9 +60,9 @@ const CONFIG = {
     
     // Supported currencies
     CURRENCIES: [
-        { value: 'bitcoin', text: 'Bitcoin', symbol: 'BTC' },
-        { value: 'ethereum', text: 'Ethereum', symbol: 'ETH' },
-        { value: 'usd', text: 'USD', symbol: '$' }
+        { value: 'bitcoin', text: 'Bitcoin', messageKey: 'bitcoinName', symbol: 'BTC' },
+        { value: 'ethereum', text: 'Ethereum', messageKey: 'ethereumName', symbol: 'ETH' },
+        { value: 'usd', text: 'USD', messageKey: 'usdLabel', symbol: '$' }
     ],
     
     // Currency identifiers

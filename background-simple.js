@@ -1,5 +1,5 @@
 // CoinPeek Background Service Worker
-importScripts('config/constants.js', 'utils/formatters.js');
+importScripts('config/constants.js', 'utils/i18n.js', 'utils/formatters.js');
 
 if (CONFIG.DEBUG.ENABLED) {
     Formatters.log('info', 'Background service worker starting...');

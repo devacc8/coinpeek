@@ -181,7 +181,7 @@ class CryptoPopup {
         } catch (error) {
             Formatters.log('error', 'Failed to refresh data', error);
             this.setStatus('error');
-            this.showError('Failed to update prices. Please try again.');
+            this.showError(I18N.t('errorUpdateFailed'));
         } finally {
             this.setLoadingState(false);
         }
@@ -327,7 +327,7 @@ class CryptoPopup {
             if (currency.value !== fromValue) {
                 const option = document.createElement('option');
                 option.value = currency.value;
-                option.textContent = currency.text;
+                option.textContent = currency.messageKey ? I18N.t(currency.messageKey) : currency.text;
                 this.elements.toCurrency.appendChild(option);
 
                 if (currency.value === currentToValue) {

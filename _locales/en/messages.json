@@ -1,0 +1,102 @@
+{
+  "extName": {
+    "message": "CoinPeek"
+  },
+  "extDesc": {
+    "message": "Real-time BTC and ETH prices on the badge, network fees for both chains, and a converter."
+  },
+  "pageTitle": {
+    "message": "CoinPeek - Bitcoin Price Badge & Gas Tracker"
+  },
+  "refreshTitle": {
+    "message": "Refresh data"
+  },
+  "refreshAria": {
+    "message": "Refresh cryptocurrency data"
+  },
+  "updatedLabel": {
+    "message": "updated"
+  },
+  "neverLabel": {
+    "message": "never"
+  },
+  "networkFees": {
+    "message": "Network fees:"
+  },
+  "bitcoinName": {
+    "message": "Bitcoin"
+  },
+  "ethereumName": {
+    "message": "Ethereum"
+  },
+  "bitcoinPriceAria": {
+    "message": "Bitcoin price information"
+  },
+  "bitcoinIconAria": {
+    "message": "Bitcoin icon"
+  },
+  "ethereumPriceAria": {
+    "message": "Ethereum price information"
+  },
+  "ethereumIconAria": {
+    "message": "Ethereum icon"
+  },
+  "quickConvert": {
+    "message": "Quick Convert"
+  },
+  "swapCurrencies": {
+    "message": "Swap currencies"
+  },
+  "converterAria": {
+    "message": "Currency converter"
+  },
+  "fromCurrency": {
+    "message": "From currency"
+  },
+  "sourceCurrency": {
+    "message": "Source currency"
+  },
+  "amountToConvert": {
+    "message": "Amount to convert"
+  },
+  "toCurrency": {
+    "message": "To currency"
+  },
+  "targetCurrency": {
+    "message": "Target currency"
+  },
+  "convertedAmount": {
+    "message": "Converted amount"
+  },
+  "usdLabel": {
+    "message": "USD"
+  },
+  "errorUpdateFailed": {
+    "message": "Failed to update prices. Please try again."
+  },
+  "timeNever": {
+    "message": "never"
+  },
+  "timeJustNow": {
+    "message": "just now"
+  },
+  "timeSecondsAgo": {
+    "message": "$COUNT$ seconds ago",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "timeMinutesAgo": {
+    "message": "$COUNT$ min ago",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "localeCode": {
+    "message": "en"
+  }
+}

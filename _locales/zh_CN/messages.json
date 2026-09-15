@@ -1,0 +1,102 @@
+{
+  "extName": {
+    "message": "CoinPeek"
+  },
+  "extDesc": {
+    "message": "在徽章上实时显示 BTC 与 ETH 价格、两条网络的费率，以及货币换算器。"
+  },
+  "pageTitle": {
+    "message": "CoinPeek - 比特币价格与网络费率"
+  },
+  "refreshTitle": {
+    "message": "刷新数据"
+  },
+  "refreshAria": {
+    "message": "刷新加密货币数据"
+  },
+  "updatedLabel": {
+    "message": "已更新"
+  },
+  "neverLabel": {
+    "message": "从未"
+  },
+  "networkFees": {
+    "message": "网络费率："
+  },
+  "bitcoinName": {
+    "message": "比特币"
+  },
+  "ethereumName": {
+    "message": "以太坊"
+  },
+  "bitcoinPriceAria": {
+    "message": "比特币价格信息"
+  },
+  "bitcoinIconAria": {
+    "message": "比特币图标"
+  },
+  "ethereumPriceAria": {
+    "message": "以太坊价格信息"
+  },
+  "ethereumIconAria": {
+    "message": "以太坊图标"
+  },
+  "quickConvert": {
+    "message": "快速换算"
+  },
+  "swapCurrencies": {
+    "message": "交换币种"
+  },
+  "converterAria": {
+    "message": "货币换算器"
+  },
+  "fromCurrency": {
+    "message": "来源币种"
+  },
+  "sourceCurrency": {
+    "message": "来源币种"
+  },
+  "amountToConvert": {
+    "message": "换算金额"
+  },
+  "toCurrency": {
+    "message": "目标币种"
+  },
+  "targetCurrency": {
+    "message": "目标币种"
+  },
+  "convertedAmount": {
+    "message": "换算结果"
+  },
+  "usdLabel": {
+    "message": "USD"
+  },
+  "errorUpdateFailed": {
+    "message": "无法更新价格，请重试。"
+  },
+  "timeNever": {
+    "message": "从未"
+  },
+  "timeJustNow": {
+    "message": "刚刚"
+  },
+  "timeSecondsAgo": {
+    "message": "$COUNT$ 秒前",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "timeMinutesAgo": {
+    "message": "$COUNT$ 分钟前",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "localeCode": {
+    "message": "zh-CN"
+  }
+}

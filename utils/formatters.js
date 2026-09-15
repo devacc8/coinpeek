@@ -36,24 +36,24 @@ class Formatters {
     }
     
     static formatTimeAgo(timestamp) {
-        if (!timestamp) return 'never';
+        if (!timestamp) return I18N.t('timeNever');
 
         const date = new Date(timestamp);
-        if (isNaN(date.getTime())) return 'never';
+        if (isNaN(date.getTime())) return I18N.t('timeNever');
 
         const now = new Date();
         const diffMs = now - date;
 
         // Handle future timestamps or invalid dates
-        if (diffMs < 0) return 'just now';
+        if (diffMs < 0) return I18N.t('timeJustNow');
 
         const diffSecs = Math.floor(diffMs / 1000);
         const diffMins = Math.floor(diffMs / 60000);
 
         if (diffSecs < 60) {
-            return `${diffSecs} seconds ago`;
+            return I18N.t('timeSecondsAgo', [String(diffSecs)]);
         } else if (diffMins < 60) {
-            return `${diffMins} min ago`;
+            return I18N.t('timeMinutesAgo', [String(diffMins)]);
         } else {
             return date.toLocaleTimeString();
         }

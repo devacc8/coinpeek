@@ -1,0 +1,102 @@
+{
+  "extName": {
+    "message": "CoinPeek"
+  },
+  "extDesc": {
+    "message": "Precios de BTC y ETH en el icono, comisiones de red de ambas cadenas y conversor."
+  },
+  "pageTitle": {
+    "message": "CoinPeek - precio de Bitcoin y comisiones de red"
+  },
+  "refreshTitle": {
+    "message": "Actualizar datos"
+  },
+  "refreshAria": {
+    "message": "Actualizar los datos de criptomonedas"
+  },
+  "updatedLabel": {
+    "message": "actualizado"
+  },
+  "neverLabel": {
+    "message": "nunca"
+  },
+  "networkFees": {
+    "message": "Comisiones de red:"
+  },
+  "bitcoinName": {
+    "message": "Bitcoin"
+  },
+  "ethereumName": {
+    "message": "Ethereum"
+  },
+  "bitcoinPriceAria": {
+    "message": "Información del precio de Bitcoin"
+  },
+  "bitcoinIconAria": {
+    "message": "Icono de Bitcoin"
+  },
+  "ethereumPriceAria": {
+    "message": "Información del precio de Ethereum"
+  },
+  "ethereumIconAria": {
+    "message": "Icono de Ethereum"
+  },
+  "quickConvert": {
+    "message": "Conversión rápida"
+  },
+  "swapCurrencies": {
+    "message": "Intercambiar monedas"
+  },
+  "converterAria": {
+    "message": "Conversor de monedas"
+  },
+  "fromCurrency": {
+    "message": "Moneda de origen"
+  },
+  "sourceCurrency": {
+    "message": "Moneda de origen"
+  },
+  "amountToConvert": {
+    "message": "Cantidad a convertir"
+  },
+  "toCurrency": {
+    "message": "Moneda de destino"
+  },
+  "targetCurrency": {
+    "message": "Moneda de destino"
+  },
+  "convertedAmount": {
+    "message": "Cantidad convertida"
+  },
+  "usdLabel": {
+    "message": "USD"
+  },
+  "errorUpdateFailed": {
+    "message": "No se pudieron actualizar los precios. Inténtalo de nuevo."
+  },
+  "timeNever": {
+    "message": "nunca"
+  },
+  "timeJustNow": {
+    "message": "ahora mismo"
+  },
+  "timeSecondsAgo": {
+    "message": "hace $COUNT$ s",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "timeMinutesAgo": {
+    "message": "hace $COUNT$ min",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "localeCode": {
+    "message": "es"
+  }
+}
