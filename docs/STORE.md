@@ -322,25 +322,25 @@ Código abierto y gratis para siempre. El código completo está en GitHub.
 English:
 
 ```
-Bitcoin fee estimates no longer overstate a quiet mempool. Fees below 1 sat/vB were thrown away, so the extension fell back to a built-in number and could suggest paying ten times more than needed. It now shows the real fees below 1 sat/vB that the network accepts. Nothing else changed.
+Bitcoin fee estimates no longer overstate a quiet mempool. Fees below 1 sat/vB were thrown away, so the extension fell back to a built-in number and could suggest paying ten times more than needed. It now shows the real fees below 1 sat/vB that the network accepts.
 ```
 
 Russian:
 
 ```
-Оценка комиссий Биткоина больше не завышает в тихом мемпуле. Комиссии ниже 1 sat/vB отбрасывались, и расширение подставляло встроенное число, то есть могло предложить заплатить в десять раз больше, чем нужно. Теперь показываются реальные комиссии ниже 1 sat/vB, которые принимает сеть. Больше ничего не изменилось.
+Оценка комиссий Биткоина больше не завышает в тихом мемпуле. Комиссии ниже 1 sat/vB отбрасывались, и расширение подставляло встроенное число, то есть могло предложить заплатить в десять раз больше, чем нужно. Теперь показываются реальные комиссии ниже 1 sat/vB, которые принимает сеть.
 ```
 
 Chinese (Simplified):
 
 ```
-比特币手续费估算不再在内存池空闲时高估。低于 1 sat/vB 的费率此前会被丢弃，扩展改用内置数值，可能建议支付十倍于实际所需的费用。现在会显示网络真正接受的、低于 1 sat/vB 的费率。其他部分没有改动。
+比特币手续费估算不再在内存池空闲时高估。低于 1 sat/vB 的费率此前会被丢弃，扩展改用内置数值，可能建议支付十倍于实际所需的费用。现在会显示网络真正接受的、低于 1 sat/vB 的费率。
 ```
 
 Spanish:
 
 ```
-La estimación de comisiones de Bitcoin ya no exagera cuando el mempool está tranquilo. Las comisiones por debajo de 1 sat/vB se descartaban, así que la extensión usaba un valor interno y podía sugerir pagar diez veces más de lo necesario. Ahora muestra las comisiones reales por debajo de 1 sat/vB que la red acepta. Nada más ha cambiado.
+La estimación de comisiones de Bitcoin ya no exagera cuando el mempool está tranquilo. Las comisiones por debajo de 1 sat/vB se descartaban, así que la extensión usaba un valor interno y podía sugerir pagar diez veces más de lo necesario. Ahora muestra las comisiones reales por debajo de 1 sat/vB que la red acepta.
 ```
 
 ### 1.1.3
