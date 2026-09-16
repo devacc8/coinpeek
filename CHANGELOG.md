@@ -2,6 +2,29 @@
 
 All notable changes to CoinPeek will be documented in this file.
 
+## [1.1.4] - 2026-09-15
+
+### The relay floor moved and the fee parser never heard about it
+
+#### Fixed
+- **Sub-1 sat/vB readings were rounded away**: every Bitcoin fee went through
+  `Math.round`, so a quiet mempool reading of 0.1 or 0.5 sat/vB became 0. The
+  relay-floor check then threw the source out, even though nodes have relayed
+  those fees since Bitcoin Core 30.0. Readings below 1 sat/vB keep two decimals
+  now, and so do the values the Bitcoin multipliers derive from them.
+- **`MIN_RELAY_FEE_SAT_VB` was stale**: it still said 1 sat/vB, the pre-30.0
+  default. Bitcoin Core 30.0 lowered `-minrelaytxfee` to 0.1 sat/vB in October
+  2025, so the constant is 0.1 with a comment explaining that this is node
+  policy rather than consensus.
+- **A quiet mempool overstated fees tenfold**: with both bugs in place every
+  source failed the check and the popup fell back to the built-in 1, 2 and
+  3 sat/vB while the chain cleared at 0.1.
+
+#### Changed
+- The built-in Bitcoin fallback stays at 1, 2 and 3 sat/vB on purpose. It only
+  appears when every live source failed, and a fee that confirms is the better
+  answer when nothing is known.
+
 ## [1.1.3] - 2026-09-14
 
 ### Four languages, permissions and documentation

@@ -37,9 +37,13 @@ const CONFIG = {
         FAST: 2
     },
 
-    // Bitcoin does not relay a transaction below this fee, so a source reporting
-    // a lower number is skipped and the next source is tried instead.
-    MIN_RELAY_FEE_SAT_VB: 1,
+    // A source reporting below this fee is skipped and the next one is tried.
+    // Bitcoin Core 30.0 (October 2025) lowered the default relay floor from
+    // 1 sat/vB to 0.1 sat/vB, which is why this is no longer a whole number:
+    // a quiet mempool prices at 0.1 and those transactions do relay. It stayed
+    // node policy rather than consensus, so this is a floor to check against,
+    // not a promise that such a transaction confirms.
+    MIN_RELAY_FEE_SAT_VB: 0.1,
     
     // Last-resort gas values, used only when every live source fails. Ethereum
     // fees move by orders of magnitude (0.06 gwei in 2026 against 20 gwei in
@@ -52,6 +56,10 @@ const CONFIG = {
             fast: null
         },
         BITCOIN: {
+            // Deliberately conservative: this only appears when every source
+            // failed, and a fee that confirms beats a cheap one that sits in
+            // the mempool. Live readings below 1 sat/vB are normal on a quiet
+            // mempool, and they win whenever any source answers.
             low: 1,
             standard: 2,
             fast: 3

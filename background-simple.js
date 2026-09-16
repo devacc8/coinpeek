@@ -214,12 +214,16 @@ class SimpleApiService {
     }
 
     async fetchBitcoinGas() {
-        // 0 sat/vB is what a quiet mempool reports, but a transaction below the
-        // 1 sat/vB relay minimum never leaves the node, so a source that reports
-        // 0 is skipped and the next one is tried.
+        // Fees are whole satoshis, but sat/vB is a ratio and comes back
+        // fractional: a quiet mempool prices at 0.1 to 0.5. Nodes relay those
+        // since Bitcoin Core 30.0, so rounding to whole satoshis would turn a
+        // usable 0.1 into 0 and throw the source away. Below 1 sat/vB the value
+        // keeps two decimals; 0 is still rejected, because a transaction that
+        // pays nothing never leaves the node.
+        const roundFee = (value) => Number(value.toFixed(value < 1 ? 2 : 0));
         const feeNumber = (value) => {
             const number = Number(value);
-            return Number.isFinite(number) && number >= 0 ? Math.round(number) : null;
+            return Number.isFinite(number) && number >= 0 ? roundFee(number) : null;
         };
 
         const apis = [
@@ -244,7 +248,7 @@ class SimpleApiService {
                     return {
                         low,
                         standard,
-                        fast: Math.round(standard * CONFIG.FEE_MULTIPLIERS.STANDARD)
+                        fast: roundFee(standard * CONFIG.FEE_MULTIPLIERS.STANDARD)
                     };
                 }
             },
@@ -256,8 +260,8 @@ class SimpleApiService {
                     if (fee === null) return null;
                     return {
                         low: fee,
-                        standard: Math.round(fee * CONFIG.FEE_MULTIPLIERS.STANDARD),
-                        fast: Math.round(fee * CONFIG.FEE_MULTIPLIERS.FAST)
+                        standard: roundFee(fee * CONFIG.FEE_MULTIPLIERS.STANDARD),
+                        fast: roundFee(fee * CONFIG.FEE_MULTIPLIERS.FAST)
                     };
                 }
             }
