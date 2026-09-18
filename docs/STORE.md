@@ -317,30 +317,56 @@ Código abierto y gratis para siempre. El código completo está en GitHub.
 
 ## What's new
 
-### 1.1.4
+### 1.1.5
 
 English:
 
 ```
-Bitcoin fee estimates no longer overstate a quiet mempool. Fees below 1 sat/vB were thrown away, so the extension fell back to a built-in number and could suggest paying ten times more than needed. It now shows the real fees below 1 sat/vB that the network accepts. Scrollbars and native controls follow the dark popup now instead of rendering light.
+Scrollbars and native form controls in the popup now follow its dark surface instead of rendering light.
 ```
 
 Russian:
 
 ```
-Оценка комиссий Биткоина больше не завышает в тихом мемпуле. Комиссии ниже 1 sat/vB отбрасывались, и расширение подставляло встроенное число, то есть могло предложить заплатить в десять раз больше, чем нужно. Теперь показываются реальные комиссии ниже 1 sat/vB, которые принимает сеть. Полосы прокрутки и системные элементы в попапе теперь тёмные, как и сам попап.
+Полосы прокрутки и системные элементы управления в попапе теперь тёмные, как и сам попап, а не светлые.
 ```
 
 Chinese (Simplified):
 
 ```
-比特币手续费估算不再在内存池空闲时高估。低于 1 sat/vB 的费率此前会被丢弃，扩展改用内置数值，可能建议支付十倍于实际所需的费用。现在会显示网络真正接受的、低于 1 sat/vB 的费率。弹出窗口的滚动条与原生控件现在跟随深色界面，不再显示为浅色。
+弹出窗口的滚动条与原生控件现在跟随深色界面，不再显示为浅色。
 ```
 
 Spanish:
 
 ```
-La estimación de comisiones de Bitcoin ya no exagera cuando el mempool está tranquilo. Las comisiones por debajo de 1 sat/vB se descartaban, así que la extensión usaba un valor interno y podía sugerir pagar diez veces más de lo necesario. Ahora muestra las comisiones reales por debajo de 1 sat/vB que la red acepta. Las barras de desplazamiento y los controles nativos acompañan ahora la superficie oscura del popup.
+Las barras de desplazamiento y los controles nativos del popup ahora acompañan su superficie oscura en lugar de mostrarse claros.
+```
+
+### 1.1.4
+
+English:
+
+```
+Bitcoin fee estimates no longer overstate a quiet mempool. Fees below 1 sat/vB were thrown away, so the extension fell back to a built-in number and could suggest paying ten times more than needed. It now shows the real fees below 1 sat/vB that the network accepts.
+```
+
+Russian:
+
+```
+Оценка комиссий Биткоина больше не завышает в тихом мемпуле. Комиссии ниже 1 sat/vB отбрасывались, и расширение подставляло встроенное число, то есть могло предложить заплатить в десять раз больше, чем нужно. Теперь показываются реальные комиссии ниже 1 sat/vB, которые принимает сеть.
+```
+
+Chinese (Simplified):
+
+```
+比特币手续费估算不再在内存池空闲时高估。低于 1 sat/vB 的费率此前会被丢弃，扩展改用内置数值，可能建议支付十倍于实际所需的费用。现在会显示网络真正接受的、低于 1 sat/vB 的费率。
+```
+
+Spanish:
+
+```
+La estimación de comisiones de Bitcoin ya no exagera cuando el mempool está tranquilo. Las comisiones por debajo de 1 sat/vB se descartaban, así que la extensión usaba un valor interno y podía sugerir pagar diez veces más de lo necesario. Ahora muestra las comisiones reales por debajo de 1 sat/vB que la red acepta.
 ```
 
 ### 1.1.3
