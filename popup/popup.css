@@ -13,6 +13,9 @@ html {
 }
 
 :root {
+    /* The popup is dark only, so native chrome (scrollbars, selects, form
+       controls) must be told the same, or it renders light inside it. */
+    color-scheme: dark;
     --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
     --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);

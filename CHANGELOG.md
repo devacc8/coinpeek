@@ -19,11 +19,19 @@ All notable changes to CoinPeek will be documented in this file.
 - **A quiet mempool overstated fees tenfold**: with both bugs in place every
   source failed the check and the popup fell back to the built-in 1, 2 and
   3 sat/vB while the chain cleared at 0.1.
+- **Native controls in the dark popup rendered light**: the popup declares
+  `color-scheme: dark` now, so scrollbars, selects and form controls follow the
+  dark surface instead of rendering light inside it.
 
 #### Changed
 - The built-in Bitcoin fallback stays at 1, 2 and 3 sat/vB on purpose. It only
   appears when every live source failed, and a fee that confirms is the better
   answer when nothing is known.
+
+#### Removed
+- **The stray `icons/placeholder.txt`**: it described how the icons were made,
+  which `dev-tools/README.md` already covers, and the build includes the whole
+  `icons/` folder, so the note shipped inside the extension package.
 
 ## [1.1.3] - 2026-09-14
 

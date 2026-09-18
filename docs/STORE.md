@@ -322,25 +322,25 @@ Código abierto y gratis para siempre. El código completo está en GitHub.
 English:
 
 ```
-Bitcoin fee estimates no longer overstate a quiet mempool. Fees below 1 sat/vB were thrown away, so the extension fell back to a built-in number and could suggest paying ten times more than needed. It now shows the real fees below 1 sat/vB that the network accepts.
+Bitcoin fee estimates no longer overstate a quiet mempool. Fees below 1 sat/vB were thrown away, so the extension fell back to a built-in number and could suggest paying ten times more than needed. It now shows the real fees below 1 sat/vB that the network accepts. Scrollbars and native controls follow the dark popup now instead of rendering light.
 ```
 
 Russian:
 
 ```
-Оценка комиссий Биткоина больше не завышает в тихом мемпуле. Комиссии ниже 1 sat/vB отбрасывались, и расширение подставляло встроенное число, то есть могло предложить заплатить в десять раз больше, чем нужно. Теперь показываются реальные комиссии ниже 1 sat/vB, которые принимает сеть.
+Оценка комиссий Биткоина больше не завышает в тихом мемпуле. Комиссии ниже 1 sat/vB отбрасывались, и расширение подставляло встроенное число, то есть могло предложить заплатить в десять раз больше, чем нужно. Теперь показываются реальные комиссии ниже 1 sat/vB, которые принимает сеть. Полосы прокрутки и системные элементы в попапе теперь тёмные, как и сам попап.
 ```
 
 Chinese (Simplified):
 
 ```
-比特币手续费估算不再在内存池空闲时高估。低于 1 sat/vB 的费率此前会被丢弃，扩展改用内置数值，可能建议支付十倍于实际所需的费用。现在会显示网络真正接受的、低于 1 sat/vB 的费率。
+比特币手续费估算不再在内存池空闲时高估。低于 1 sat/vB 的费率此前会被丢弃，扩展改用内置数值，可能建议支付十倍于实际所需的费用。现在会显示网络真正接受的、低于 1 sat/vB 的费率。弹出窗口的滚动条与原生控件现在跟随深色界面，不再显示为浅色。
 ```
 
 Spanish:
 
 ```
-La estimación de comisiones de Bitcoin ya no exagera cuando el mempool está tranquilo. Las comisiones por debajo de 1 sat/vB se descartaban, así que la extensión usaba un valor interno y podía sugerir pagar diez veces más de lo necesario. Ahora muestra las comisiones reales por debajo de 1 sat/vB que la red acepta.
+La estimación de comisiones de Bitcoin ya no exagera cuando el mempool está tranquilo. Las comisiones por debajo de 1 sat/vB se descartaban, así que la extensión usaba un valor interno y podía sugerir pagar diez veces más de lo necesario. Ahora muestra las comisiones reales por debajo de 1 sat/vB que la red acepta. Las barras de desplazamiento y los controles nativos acompañan ahora la superficie oscura del popup.
 ```
 
 ### 1.1.3
@@ -374,3 +374,13 @@ Spanish:
 ```
 Las comisiones de red vuelven a funcionar. El servicio que se usaba para las comisiones de Ethereum cerró en junio de 2026 y la fila dejó de cargar; ahora lee de otra fuente, con un respaldo. Se ha eliminado un permiso que no se usaba, y la extensión habla inglés, ruso, chino y español siguiendo el idioma del navegador.
 ```
+
+## Assets
+
+| File | Where it is used |
+|---|---|
+| `icons/icon16.png`, `icons/icon48.png`, `icons/icon128.png` | the extension icons, shipped inside the package; regenerate them with `dev-tools/create-icons.html` |
+| `images/1.png` | the screenshot the README shows |
+| `images/2.png`, `images/3.png` | the Chrome Web Store listing screenshots; they are not part of the built package |
+
+`build.js` packs an include list, so only the icons travel with the extension. Store screenshots live in the repository as the source for the listing, and the store keeps its own copy of whatever was uploaded.
